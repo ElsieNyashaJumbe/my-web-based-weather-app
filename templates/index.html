@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Local Weather & Forecast</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="weather-app">
+            <div class="header">
+                <h1 class="title">🌤️ Weather App</h1>
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        placeholder="Search for a city..." 
+                        class="search-input"
+                    >
+                    <button onclick="searchCity()" class="search-button">
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Getting your local weather...</p>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+
+            <div id="weatherContent" style="display: none;">
+                <!-- Current Weather Section -->
+                <div class="current-weather">
+                    <div class="location-header">
+                        <h2 id="cityName"></h2>
+                        <button onclick="refreshWeather()" class="refresh-btn">↻</button>
+                    </div>
+                    
+                    <div class="weather-main">
+                        <img id="currentWeatherIcon" src="" alt="Weather icon" class="main-weather-icon">
+                        <div class="main-temp">
+                            <span id="currentTemp"></span>°C
+                        </div>
+                        <div id="currentDescription" class="weather-description"></div>
+                    </div>
+
+                    <div class="feels-like">
+                        Feels like <span id="feelsLike"></span>°C
+                    </div>
+
+                    <div class="weather-stats">
+                        <div class="stat">
+                            <span class="stat-label">Humidity</span>
+                            <span class="stat-value" id="humidity"></span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Wind</span>
+                            <span class="stat-value" id="windSpeed"></span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Pressure</span>
+                            <span class="stat-value" id="pressure"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hourly Forecast Section -->
+                <div class="hourly-forecast">
+                    <h3>Today's Hourly Forecast</h3>
+                    <div class="hourly-container" id="hourlyForecast">
+                        <!-- Hourly items will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- 7-Day Forecast Section -->
+                <div class="daily-forecast">
+                    <h3>7-Day Forecast</h3>
+                    <div class="daily-container" id="dailyForecast">
+                        <!-- Daily items will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for detailed day view -->
+            <div id="dayModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modalDayTitle"></h2>
+                    <div class="modal-weather" id="modalWeatherDetails">
+                        <!-- Detailed hour-by-hour forecast will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
