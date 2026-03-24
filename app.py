@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request, jsonify
 import requests
 from datetime import datetime, timedelta
@@ -276,3 +278,9 @@ if __name__ == '__main__':
     print("=" * 40)
     print("Open your browser and go to: http://localhost:5000")
     app.run(debug=True)
+    
+if __name__ == '__main__':
+    # Get port from environment variable (Render sets this automatically)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
+    import os
